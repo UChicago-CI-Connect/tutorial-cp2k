@@ -1,4 +1,5 @@
-universe = vanilla
+Universe = grid
+grid_resource = batch condor dbala@login.ci-connect.uchicago.edu
 
 output = job.out.$(Process)
 error = job.error.$(Process)
@@ -6,7 +7,13 @@ log = job.log.$(Process)
 
 executable = cp2k.sh
 arguments = cs_cell_opt_direct_lbfgs.inp
-
 transfer_input_files = cs_cell_opt_direct_lbfgs.inp
+
+transfer_output_files = OutPutDir.tar.gz
+should_transfer_files=YES
+when_to_transfer_output = ON_EXIT
+requirements = (HAS_CVMFS_oasis_opensciencegrid_org =?= TRUE)
++ProjectName="ConnectTrain"
+
 
 queue 1
